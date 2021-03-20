@@ -8,30 +8,34 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class Activity2 extends AppCompatActivity {
-int minteger;
+public class Activity2 extends AppCompatActivity  implements View.OnClickListener {
+int minteger, counter;
 Button button1;
+    TextView displayInteger;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2);
+        displayInteger = (TextView) findViewById(R.id.CounterValue);
 
-      /*  button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                increaseInteger(minteger);
-
-            }*/
+        button1.setOnClickListener(this);
     }
-
+    public void onClick(View v)
+    {
+        boolean showText = false;
+        switch(v.getId())
+        {
+            case R.id.button1: counter++; showText = true; break;
+        }
+        if(showText)
+            displayInteger.setText("Result : "+ counter);
+    }
     public void increaseInteger(View view) {
         minteger = minteger + 1;
-        display(minteger);
+       // display(minteger);
     }
 
     private void display(int number) {
-        TextView displayInteger = (TextView) findViewById(R.id.CounterValue);
         displayInteger.setText(": " + number);
     }
 }
